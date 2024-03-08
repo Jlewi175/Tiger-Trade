@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Item = require('../models/item');
 
-// Create item
 router.post('/', async (req, res) => {
   const { itemName, itemDescription, itemPrice, owner } = req.body;
 
@@ -21,7 +20,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Get all items
 router.get('/', async (req, res) => {
   try {
     const items = await Item.find();
@@ -31,7 +29,6 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get items by owner ID
 router.get('/owner/:ownerId', async (req, res) => {
   try {
     const items = await Item.find({ owner: req.params.ownerId });
@@ -41,7 +38,6 @@ router.get('/owner/:ownerId', async (req, res) => {
   }
 });
 
-// Delete item by ID
 router.delete('/:id', getItem, async (req, res) => {
   try {
     await res.locals.item.deleteOne();
@@ -51,7 +47,6 @@ router.delete('/:id', getItem, async (req, res) => {
   }
 });
 
-// Middleware for getting item by ID
 async function getItem(req, res, next) {
   try {
     const item = await Item.findById(req.params.id);
