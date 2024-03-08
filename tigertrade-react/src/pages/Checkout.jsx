@@ -11,7 +11,6 @@ function Checkout({ cart }) {
   const [paymentStatus, setPaymentStatus] = useState('');
 
   function handlePlaceOrder(total) {
-    // Send payment details to server
     fetch('/api/orders', {
       method: 'POST',
       headers: {
@@ -21,19 +20,16 @@ function Checkout({ cart }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Redirect to order confirmation page
         navigate(`/confirmation/${data.orderId}`);
       })
       .catch((error) => console.error('Error placing order:', error));
   }
 
-  // Calculate total price of items in cart
   const total = cart.reduce((acc, item) => acc + item.itemPrice, 0).toFixed(2);
 
   function onToken(token) {
     console.log('Token:', token);
 
-    // Send payment details to server
     fetch('/api/payments', {
       method: 'POST',
       headers: {
@@ -47,9 +43,7 @@ function Checkout({ cart }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Set payment status to success
         setPaymentStatus('success');
-        // Redirect to order confirmation page after 3 seconds
         setTimeout(() => {
           navigate(`/confirmation/${data.orderId}`);
         }, 3000);

@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-// Connect to MongoDB
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('Connected to Database'))
   .catch(error => console.error(error));
@@ -22,5 +21,4 @@ app.use('/users', userRouter);
 const itemRouter = require('./routes/items');
 app.use('/items', itemRouter);
 
-// Export the app for serverless deployment
 module.exports = app;

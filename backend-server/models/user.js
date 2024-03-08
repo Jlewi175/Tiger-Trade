@@ -16,17 +16,15 @@ const userSchema = new mongoose.Schema({
   },
   accountType: {
     type: String,
-    enum: ['buyer', 'seller'], // Only allows 'buyer' or 'seller' as values
+    enum: ['buyer', 'seller'],
     required: true
   }
 });
 
-// Add method to validate password
 userSchema.methods.validatePassword = async function(password) {
   return await bcrypt.compare(password, this.password);
 };
 
-// Pre-save hook to hash password
 userSchema.pre('save', async function(next) {
   if (this.isModified('password') || this.isNew) {
     this.password = await bcrypt.hash(this.password, 10);

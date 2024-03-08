@@ -58,8 +58,7 @@ function Seller() {
     if (account) { 
       fetchItems();
     }
-  }, [account]); // added account to dependencies
-
+  }, [account]);
   return (
     <div>
       <NavBar />
