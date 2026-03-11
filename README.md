@@ -24,7 +24,7 @@ Key functionality includes:
 - **Authentication**: JSON Web Tokens
 - **Styling**: CSS for a responsive design
 
-## Testing and Quality Assurance
+## Testing
 
 Testing was performed to verify system functionality and ensure reliable transaction processing.
 
